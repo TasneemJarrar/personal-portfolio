@@ -11,6 +11,7 @@ async function fetchData() {
 
         displayAboutMe();
         displayProjects();
+        setupFormValidation();
 
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -133,4 +134,49 @@ function setupCardListeners() {
         });
     });
 }
+
+// Form submission validation
+function setupFormValidation() {
+    const form = document.getElementById('formSection');
+    const email = document.getElementById('contactEmail');
+    const message = document.getElementById('contactMessage');
+    const emailError = document.getElementById('emailError');
+    const messageError = document.getElementById('messageError');
+    const illegalChars = /[^a-zA-Z0-9@._-]/;
+    const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        emailError.textContent = '';
+        messageError.textContent = '';
+
+        let isValid = true;
+        if (email.value === '') {
+            emailError.textContent = 'Email cannot be empty.';
+            isValid = false;
+        } else if (illegalChars.test(email.value)) {
+            emailError.textContent = 'Email contains illegal characters.';
+            isValid = false;
+        } else if (!validEmail.test(email.value)) {
+            emailError.textContent = 'Please enter a valid email address.';
+            isValid = false;
+        }
+
+        if (message.value === '') {
+            messageError.textContent = 'Message cannot be empty.';
+            isValid = false;
+        } else if (illegalChars.test(message.value)) {
+            messageError.textContent = 'Message contains illegal characters.';
+            isValid = false;
+        } else if (message.value.length > 300) {
+            messageError.textContent = 'Message cannot exceed 300 characters.';
+            isValid = false;
+        }
+
+        if (isValid) {
+            alert('Form submitted successfully! Validation passed.');
+        }
+    });
+}
+
 
