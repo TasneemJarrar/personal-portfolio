@@ -30,7 +30,7 @@ function displayAboutMe() {
 
     headshotContainer.classList.add('headshotContainer');
 
-    headshot.src = aboutMeData.headshot || '';
+    headshot.src = (aboutMeData.headshot || '').replace('../images/', './images/');
     headshot.alt = 'Headshot photo';
 
     headshotContainer.appendChild(headshot);
@@ -51,7 +51,7 @@ function displayProjects() {
         card.classList.add('projectCard');
         card.id = project.project_id;
 
-        const cardImage = project.card_image || './images/card_placeholder_bg.webp';
+        const cardImage = (project.card_image || './images/card_placeholder_bg.webp').replace('../images/', './images/');
         card.style.backgroundImage = `url(${cardImage})`;
         card.style.backgroundSize = 'cover';
         card.style.backgroundPosition = 'center';
@@ -68,7 +68,6 @@ function displayProjects() {
     });
 
     projectList.appendChild(fragment);
-
 }
 
 
