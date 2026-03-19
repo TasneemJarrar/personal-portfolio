@@ -68,6 +68,29 @@ function displayProjects() {
     });
 
     projectList.appendChild(fragment);
+    setupScrollArrows();
 }
 
+function setupScrollArrows() {
+    const arrowLeft = document.querySelector('.arrow-left');
+    const arrowRight = document.querySelector('.arrow-right');
+    const projectList = document.getElementById('projectList');
+    const isDesktop = window.matchMedia('(min-width: 1024px)');
+
+    arrowLeft.addEventListener('click', () => {
+        if (isDesktop.matches) {
+            projectList.scrollBy({ top: -220, behavior: 'smooth' });
+        } else {
+            projectList.scrollBy({ left: -220, behavior: 'smooth' });
+        }
+    });
+
+    arrowRight.addEventListener('click', () => {
+        if (isDesktop.matches) {
+            projectList.scrollBy({ top: 220, behavior: 'smooth' });
+        } else {
+            projectList.scrollBy({ left: 220, behavior: 'smooth' });
+        }
+    });
+}
 
