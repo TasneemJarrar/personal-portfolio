@@ -68,5 +68,7 @@ function displayProjects() {
     });
 
     projectList.appendChild(fragment);
+
 }
+
 
