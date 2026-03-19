@@ -3,10 +3,10 @@ let projectsData;
 
 async function fetchData() {
     try {
-        const aboutMeResponse = await fetch('../data/aboutMeData.json');
+        const aboutMeResponse = await fetch('./data/aboutMeData.json');
         aboutMeData = await aboutMeResponse.json();
 
-        const projectsResponse = await fetch('../data/projectsData.json');
+        const projectsResponse = await fetch('./data/projectsData.json');
         projectsData = await projectsResponse.json();
 
         displayAboutMe();
@@ -69,5 +69,4 @@ function displayProjects() {
 
     projectList.appendChild(fragment);
 }
-
 
