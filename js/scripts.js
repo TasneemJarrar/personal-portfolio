@@ -70,6 +70,7 @@ function displayProjects() {
     projectList.appendChild(fragment);
     updateSpotlight(projectsData[0]);
     setupScrollArrows();
+    setupCardListeners();
 }
 
 function setupScrollArrows() {
@@ -98,7 +99,7 @@ function setupScrollArrows() {
 function updateSpotlight(project) {
     const spotlight = document.getElementById('projectSpotlight');
     const spotlightTitles = document.getElementById('spotlightTitles');
-    const spotlightImage = (project.spotlight_image || './images/spotlight_placeholder_bg.webp').replace('../images/', './images/');    const title = document.createElement('h3');
+  const spotlightImage = (project.spotlight_image || './images/spotlight_placeholder_bg.webp').replace('../images/', './images/');    const title = document.createElement('h3');
     const longDesc = document.createElement('p');
     const link = document.createElement('a');
     const fragment = document.createDocumentFragment();
@@ -119,5 +120,17 @@ function updateSpotlight(project) {
     fragment.appendChild(longDesc);
     fragment.appendChild(link);
     spotlightTitles.appendChild(fragment);
+}
+
+function setupCardListeners() {
+    const cards = document.querySelectorAll('.projectCard');
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            const project = projectsData.find(p => p.project_id === card.id);
+            if (project) {
+                updateSpotlight(project);
+            }
+        });
+    });
 }
 
