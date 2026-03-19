@@ -11,6 +11,7 @@ async function fetchData() {
 
         displayAboutMe();
         displayProjects();
+        setupCharacterCounter(); 
         setupFormValidation();
 
     } catch (error) {
@@ -179,4 +180,18 @@ function setupFormValidation() {
     });
 }
 
+// setup Character Counter
+function setupCharacterCounter() {
+    const message = document.getElementById('contactMessage');
+    const counter = document.getElementById('charactersLeft');
+    message.addEventListener('input', () => {
+        const count = message.value.length;
+        counter.textContent = `Characters: ${count}/300`;
+        if (count > 300) {
+            counter.classList.add('error');
+        } else {
+            counter.classList.remove('error');
+        }
+    });
+}
 
