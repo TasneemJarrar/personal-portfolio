@@ -68,6 +68,7 @@ function displayProjects() {
     });
 
     projectList.appendChild(fragment);
+    updateSpotlight(projectsData[0]);
     setupScrollArrows();
 }
 
@@ -92,5 +93,31 @@ function setupScrollArrows() {
             projectList.scrollBy({ left: 220, behavior: 'smooth' });
         }
     });
+}
+
+function updateSpotlight(project) {
+    const spotlight = document.getElementById('projectSpotlight');
+    const spotlightTitles = document.getElementById('spotlightTitles');
+    const spotlightImage = (project.spotlight_image || './images/spotlight_placeholder_bg.webp').replace('../images/', './images/');    const title = document.createElement('h3');
+    const longDesc = document.createElement('p');
+    const link = document.createElement('a');
+    const fragment = document.createDocumentFragment();
+
+    spotlight.style.backgroundImage = `url(${spotlightImage})`;
+    spotlight.style.backgroundSize = 'cover';
+    spotlight.style.backgroundPosition = 'center';
+    spotlightTitles.textContent = '';
+
+    title.textContent = project.project_name || 'Untitled Project';
+
+    longDesc.textContent = project.long_description || 'No description available.';
+
+    link.textContent = 'Click here to see more...';
+    link.href = project.url || '#';
+
+    fragment.appendChild(title);
+    fragment.appendChild(longDesc);
+    fragment.appendChild(link);
+    spotlightTitles.appendChild(fragment);
 }
 
